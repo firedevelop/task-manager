@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Task Manager</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="users.html">Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="tasks.html">Tasks</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Tasks</h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
+                <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#createTaskModal">
+                    Add Task
+                </button>
+            </div>
+        </div>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>User</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Completed</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="tasks-table">
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Create Task Modal -->
+    <div class="modal fade" id="createTaskModal" tabindex="-1" aria-labelledby="createTaskModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="createTaskModalLabel">Add Task</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="create-task-form">
+              <div class="mb-3">
+                <label for="create-task-name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="create-task-name" required>
+              </div>
+              <div class="mb-3">
+                <label for="create-task-description" class="form-label">Description</label>
+                <textarea class="form-control" id="create-task-description" rows="3"></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="create-task-user" class="form-label">User</label>
+                <select class="form-control" id="create-task-user" required></select>
+              </div>
+              <div class="mb-3">
+                <label for="create-task-start-date" class="form-label">Start Date</label>
+                <input type="datetime-local" class="form-control" id="create-task-start-date" required>
+              </div>
+              <div class="mb-3">
+                <label for="create-task-end-date" class="form-label">End Date</label>
+                <input type="datetime-local" class="form-control" id="create-task-end-date" required>
+              </div>
+              <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="create-task-completed">
+                <label class="form-check-label" for="create-task-completed">Completed</label>
+              </div>
+              <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Update Task Modal -->
+    <div class="modal fade" id="updateTaskModal" tabindex="-1" aria-labelledby="updateTaskModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateTaskModalLabel">Update Task</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="update-task-form">
+                        <input type="hidden" id="update-task-id">
+                        <div class="mb-3">
+                            <label for="update-task-name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="update-task-name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="update-task-description" class="form-label">Description</label>
+                            <textarea class="form-control" id="update-task-description" rows="3"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="update-task-user" class="form-label">User</label>
+                            <select class="form-control" id="update-task-user" required></select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="update-task-start-date" class="form-label">Start Date</label>
+                            <input type="datetime-local" class="form-control" id="update-task-start-date" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="update-task-end-date" class="form-label">End Date</label>
+                            <input type="datetime-local" class="form-control" id="update-task-end-date" required>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="update-task-completed">
+                            <label class="form-check-label" for="update-task-completed">Completed</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>
