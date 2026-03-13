@@ -1,12 +1,14 @@
 <?php
-class Database {
+class Database
+{
     private $host;
     private $db_name;
     private $username;
     private $password;
     public $conn;
 
-    public function __construct() {
+    public function __construct()
+    {
         $config = [];
         $envPath = __DIR__ . '/../.env';
         if (file_exists($envPath)) {
@@ -28,17 +30,17 @@ class Database {
         $this->password = $config['DB_PASSWORD'] ?? '';
     }
 
-    public function getConnection() {
+    public function getConnection()
+    {
         $this->conn = null;
 
         try {
             $this->conn = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->db_name, $this->username, $this->password);
             $this->conn->exec("set names utf8");
-        } catch(PDOException $exception) {
+        } catch (PDOException $exception) {
             echo "Connection error: " . $exception->getMessage();
         }
 
         return $this->conn;
     }
 }
-?>

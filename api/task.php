@@ -5,8 +5,8 @@ header("Access-Control-Allow-Methods: GET");
 header("Access-Control-Allow-Credentials: true");
 header('Content-Type: application/json');
 
-include_once '../../config/database.php';
-include_once '../../models/task.php';
+include_once '../config/database.php';
+include_once '../models/task.php';
 
 $database = new Database();
 $db = $database->getConnection();
@@ -15,7 +15,7 @@ $task = new Task($db);
 
 $task->id = isset($_GET['id']) ? $_GET['id'] : die();
 
-if($task->readOne()){
+if ($task->readOne()) {
     $task_arr = array(
         "id" =>  $task->id,
         "user_id" => $task->user_id,
@@ -33,4 +33,3 @@ if($task->readOne()){
     http_response_code(404);
     echo json_encode(array("message" => "Task does not exist."));
 }
-?>

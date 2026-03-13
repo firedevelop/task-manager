@@ -2,8 +2,8 @@
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
-include_once '../../config/database.php';
-include_once '../../models/task.php';
+include_once '../config/database.php';
+include_once '../models/task.php';
 
 $database = new Database();
 $db = $database->getConnection();
@@ -13,13 +13,13 @@ $task = new Task($db);
 $stmt = $task->read();
 $num = $stmt->rowCount();
 
-if($num>0){
-    $tasks_arr=array();
-    $tasks_arr["records"]=array();
+if ($num > 0) {
+    $tasks_arr = array();
+    $tasks_arr["records"] = array();
 
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         extract($row);
-        $task_item=array(
+        $task_item = array(
             "id" => $id,
             "user_id" => $user_id,
             "name" => $name,
@@ -40,4 +40,3 @@ if($num>0){
         array("message" => "No tasks found.")
     );
 }
-?>
